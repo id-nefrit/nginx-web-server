@@ -1,0 +1,62 @@
+#preparing
+apt update
+apt upgrade -y
+apt isntall apt-transport-https
+apt install curl
+apt remove nginx
+apt install nginx
+
+#add this to the sources.list 
+nano /etc/apt/sources.list
+deb https://nginx.org/packages/mainline/debian/ stretch nginx
+deb-src https://nginx.org/packages/mainline/debian/ stretch nginx
+
+nginx -v
+nginx version: nginx/1.19.5
+
+#check nginx
+/etc/init.d/nginx status
+root@debian:/etc/apt# /etc/init.d/nginx status
+● nginx.service - nginx - high performance web server
+   Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+   Active: active (running) since Tue 2020-12-15 01:33:30 +08; 6min ago
+     Docs: http://nginx.org/en/docs/
+  Process: 23973 ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.conf (code=exited, status=0/SUCCESS)
+ Main PID: 23974 (nginx)
+    Tasks: 2 (limit: 4915)
+   CGroup: /system.slice/nginx.service
+           ├─23974 nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf
+           └─23975 nginx: worker process
+
+Dec 15 01:33:30 debian systemd[1]: Starting nginx - high performance web server...
+Dec 15 01:33:30 debian systemd[1]: Started nginx - high performance web server.
+root@debian:/etc/apt#
+
+
+root@debian:/etc/apt# curl http://localhost
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+root@debian:/etc/apt#
